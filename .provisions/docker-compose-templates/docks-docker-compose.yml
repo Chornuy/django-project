@@ -1,0 +1,18 @@
+version: "3.2"
+
+services:
+  docs:
+    image: django-project-template-dev-docs
+    container_name: django-project-template-dev-docs
+    build:
+      context: ../..
+      dockerfile: ../docker/dev/docs/Dockerfile
+    env_file:
+      - ../../.django-docker
+    volumes:
+      - ./docs:/var/app/docs:z
+      - ./settings:/var/app/settings:z
+      - ./apps:/var/app/apps:z
+    ports:
+      - '9000:9000'
+    command: make livehtml

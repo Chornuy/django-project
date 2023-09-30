@@ -1,0 +1,22 @@
+# General
+DEBUG=true
+ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,django-project-template-django
+SECRET_KEY=django-insecure-j7l$$v5-zb7zd*fw49vinjq&_!0ge8daeeif1v5f5s^epevp37^
+
+# Postgresql
+DEFAULT_DB_HOST=django-project-template-postgres
+DEFAULT_DB_PORT=5432
+DEFAULT_DB_NAME=mysite
+DEFAULT_DB_USER_NAME=mysite
+DEFAULT_DB_PASSWORD=mysite
+
+# Redis
+REDIS_URL=redis://redis:6379/0
+
+# Celery
+CELERY_URL=amqp://admin:admin@django-project-template-rabbitmq//
+CELERY_BROKER_URL=amqp://admin:admin@django-project-template-rabbitmq//
+
+# Flower
+CELERY_FLOWER_USER=!!!SET CELERY_FLOWER_USER!!!
+CELERY_FLOWER_PASSWORD=!!!SET CELERY_FLOWER_PASSWORD!!!

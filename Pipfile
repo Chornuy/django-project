@@ -1,0 +1,68 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==4.2"
+django-environ = "==0.10.0"
+psycopg2-binary = "==2.9.6"
+celery = "*"
+pillow = "==9.5.0"
+djangorestframework = "==3.14.0"
+amqp = "==5.1.1"
+asgiref = "==3.6.0"
+billiard = "==3.6.4.0"
+click = "==8.1.3"
+click-didyoumean = "==0.3.0"
+click-plugins = "==1.1.1"
+click-repl = "==0.2.0"
+kombu = "==5.2.4"
+prompt-toolkit = "==3.0.38"
+pytz = "*"
+six = "==1.16.0"
+sqlparse = "==0.4.4"
+vine = "==5.0.0"
+wcwidth = "==0.2.6"
+python-slugify = "*"
+hiredis = "==2.2.2"
+django-celery-beat = "==2.5.0"
+flower = "==1.2.0"
+django-model-utils = "==4.3.1"
+django-allauth = "==0.54.0"
+django-redis = "==5.2.0"
+django-cors-headers = "==3.14.0"
+drf-spectacular = "==0.26.2"
+django-celery-results = "==2.5.1"
+djangorestframework-filters = "==1.0.0.dev1"
+drf-standardized-errors = "==0.12.5"
+djangorestframework-simplejwt = {version = "==5.2.2", extras = ["crypto"]}
+
+
+[dev-packages]
+werkzeug = {version = "==2.2.3", extras = ["watchdog"]}
+watchfiles = "==0.19.0"
+pytest-django = "==4.5.2"
+flake8-isort = "==6.0.0"
+django-debug-toolbar = "==4.0.0"
+django-extensions = "==3.2.1"
+factory-boy = "==3.2.1"
+pre-commit = "==3.2.2"
+mypy = "==1.2.0"
+django-stubs =  {version = "==4.2.3", extras = ["compatible-mypy"]}
+pytest = "==7.3.1"
+pytest-sugar = "==0.9.7"
+djangorestframework-stubs = "==1.10.0"
+django-coverage-plugin = "==3.0.0"
+
+sphinx = "==6.1.3"
+sphinx-autobuild = "==2021.3.14"
+
+flake8 = "==6.0.0"
+coverage = "==7.2.3"
+black = "==23.3.0"
+pylint-django = "==2.5.3"
+pylint-celery = "==0.3"
+
+[requires]
+python_version = "3.11"

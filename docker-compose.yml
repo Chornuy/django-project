@@ -1,0 +1,103 @@
+version: "3.2"
+
+volumes:
+  mysite_local_postgre_data: {}
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  database:
+    image: postgres:14
+    volumes:
+      - mysite_local_postgre_data:/var/lib/postgresql/data
+    container_name: django-project-template-postgres
+    env_file:
+      - .provisions/.envs/.postgresql
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U mysite" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    container_name: django-project-template-mailhog
+    ports:
+      - "8025:8025"
+    networks:
+      - backend
+
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: django-project-template-rabbitmq
+    env_file:
+      - .provisions/.envs/.rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - backend
+
+  django:  &django
+    container_name: django-project-template-django
+    build:
+      context: .
+      dockerfile: .provisions/docker/dev/django/Dockerfile
+    image: django-project-template-django
+#    restart: always
+    volumes:
+      - .:/var/app:z
+      - .provisions/docker/dev/django/docker-startup-script:/docker-startup-script
+    env_file:
+      - .provisions/.envs/.postgresql
+      - .django-docker
+    depends_on:
+      - database
+      - rabbitmq
+    ports:
+      - "8000:8000"
+    networks:
+      - backend
+    command: python manage.py runserver 0.0.0.0:8000
+
+  celery_worker:
+      <<: *django
+#      image: django-project-celeryworker
+      container_name: django-project-template-worker
+      env_file:
+        - .provisions/.envs/.postgresql
+        - .provisions/.envs/.docker-services
+        - .django-docker
+      volumes:
+        - .:/var/app:z
+        - .provisions/docker/dev/django/celery-startup-script:/docker-startup-script
+      depends_on:
+        - django
+        - database
+        - rabbitmq
+      ports: []
+      command: watchfiles --filter python celery.__main__.main --args '-A settings.celery_app worker -l INFO'
+
+  celery_beat:
+      <<: *django
+#      image: django-project-celeryworker
+      container_name: django-project-template-beat
+      env_file:
+        - .provisions/.envs/.postgresql
+        - .provisions/.envs/.docker-services
+        - .django-docker
+      volumes:
+        - .:/var/app:z
+        - .provisions/docker/dev/django/celery-startup-script:/docker-startup-script
+      depends_on:
+        - django
+        - database
+        - rabbitmq
+      ports: []
+      command: watchfiles --filter python celery.__main__.main --args '-A settings.celery_app beat -l INFO'

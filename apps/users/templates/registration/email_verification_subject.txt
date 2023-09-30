@@ -1,0 +1,3 @@
+{% load i18n %}{% autoescape off %}
+{% blocktranslate %} Subject: Verify Your Email Address - Action Required {{ site_name }}{% endblocktranslate %}
+{% endautoescape %}
