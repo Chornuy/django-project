@@ -37,23 +37,6 @@ jobs:
   pytest:
     runs-on: ubuntu-latest
 
-    services:
-      redis:
-        image: redis:6
-        ports:
-          - 6379:6379
-      postgres:
-        image: postgres:14
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_PASSWORD: postgres
-
-    env:
-      CELERY_BROKER_URL: 'redis://localhost:6379/0'
-      # postgres://user:password@host:port/database
-      DATABASE_URL: 'postgres://postgres:postgres@localhost:5432/postgres'
-
     steps:
       - name: Checkout Code Repository
         uses: actions/checkout@v4
