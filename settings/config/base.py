@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-import os
 from pathlib import Path
 
 import environ
@@ -75,7 +74,7 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
 ]
 
-LOCAL_APPS = ["apps.base", "apps.users", "apps.api_authentication", "apps.sandbox_models"]
+LOCAL_APPS = ["apps.base", "apps.users", "apps.api_authentication"]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 

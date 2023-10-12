@@ -10,4 +10,4 @@ else:
 
 URL_VERSION = r"^(?P<version>v[1])"
 
-router.register(f"v1/users", UserViewSet)
+router.register("v1/users", UserViewSet)

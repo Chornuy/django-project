@@ -1,4 +1,4 @@
-from settings.config.base import *
+from settings.config.base import *  # noqa: F403,   F405
 
 # EMAIL
 # ------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ DEBUG_TOOLBAR_CONFIG = {
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
 INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
 
-if env.bool("USE_DOCKER"):
+if env.bool("USE_DOCKER"):  # noqa: F405
     import socket
 
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())

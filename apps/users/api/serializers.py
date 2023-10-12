@@ -4,7 +4,7 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
 from apps.base.serializers.fields import CurrentUserPasswordField, PasswordField
-from apps.users.api.services import send_verification_email_after_registration, send_verify_email
+from apps.users.api.services import send_verification_email_after_registration
 from apps.users.api.validators import FieldMatchValidator
 
 User = get_user_model()
