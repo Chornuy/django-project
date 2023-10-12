@@ -48,7 +48,7 @@ class TestUserViewSet:
 
         response = api_client.post(url, data=data)
         # Successfully create user
-        assert 201 == response.status_code
+        assert status.HTTP_201_CREATED == response.status_code
 
         user = User.objects.get(email="jonhndoe@gmail.com")
 
@@ -66,7 +66,7 @@ class TestUserViewSet:
         # Detect that we send verification email
         response = api_client.get(verification_link)
 
-        assert response.status_code == 200
+        assert response.status_code == status.HTTP_200_OK
 
         user.refresh_from_db()
         assert user.is_verified is True

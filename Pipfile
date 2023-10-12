@@ -48,8 +48,8 @@ django-debug-toolbar = "==4.0.0"
 django-extensions = "==3.2.1"
 factory-boy = "==3.2.1"
 pre-commit = "==3.2.2"
-mypy = "==1.2.0"
-django-stubs =  {version = "==4.2.3", extras = ["compatible-mypy"]}
+mypy = "1.2.0"
+django-stubs =  {version = "==1.16.0", extras = ["compatible-mypy"]}
 pytest = "==7.3.1"
 pytest-sugar = "==0.9.7"
 djangorestframework-stubs = "==1.10.0"

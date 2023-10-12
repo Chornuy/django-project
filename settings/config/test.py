@@ -3,7 +3,6 @@ With these settings, tests run faster.
 """
 
 from settings.config.base import *  # noqa
-from settings.config.base import env
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -24,3 +23,5 @@ PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
+
+TEMPLATE_DEBUG = True

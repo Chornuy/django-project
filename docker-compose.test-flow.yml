@@ -1,0 +1,55 @@
+version: "3.2"
+
+volumes:
+  mysite_local_postgre_data: {}
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  database:
+    image: postgres:14
+    volumes:
+      - mysite_local_postgre_data:/var/lib/postgresql/data
+    container_name: django-project-template-postgres
+    env_file:
+      - .provisions/.envs/.postgresql
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U mysite" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: django-project-template-rabbitmq
+    env_file:
+      - .provisions/.envs/.rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - backend
+
+  django:  &django
+    container_name: django-project-template-django
+    build:
+      context: .
+      dockerfile: .provisions/docker/test/django/Dockerfile
+    image: django-project-template-django
+    env_file:
+      - .provisions/.envs/.postgresql
+      - .django-docker
+    depends_on:
+      - database
+      - rabbitmq
+    ports:
+      - "8000:8000"
+    networks:
+      - backend
+    command: python manage.py runserver 0.0.0.0:8000
